@@ -1,0 +1,42 @@
+name: Deploy site to Cloudflare Pages
+
+# Deploys the static site in site/ to Cloudflare Pages on every push to main.
+# This exists because the operator's laptop is turned off 8-12h/day; the site
+# must keep serving and keep updating without the machine running.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify site integrity
+        run: python3 scripts/verify_site.py
+
+      - name: Setup Pages
+        id: pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_PAGES_PROJECT || 'moneymmax' }}
+          directory: site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages
+          path: site
