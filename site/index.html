@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Solar Panel Calculator 2026 — How Many Panels Do You Need?</title>
+<meta name="description" content="Free solar panel calculator for 35 US cities. Uses real NASA POWER satellite irradiance data per city, not a flat estimate. See panel count, annual output and monthly production.">
+<link rel="canonical" href="https://solar.tekify.xyz/">
+<meta property="og:title" content="Free Solar Panel Calculator 2026 — How Many Panels Do You Need?">
+<meta property="og:description" content="Free solar panel calculator for 35 US cities. Uses real NASA POWER satellite irradiance data per city, not a flat estimate. See panel count, annual output and monthly production.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://solar.tekify.xyz/">
+<meta name="theme-color" content="#0b3d5c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#9728;</text></svg>">
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">&#9728;</span>
+      <span class="brand-text">Solar<span class="brand-thin">Calc</span></span>
+    </a>
+    <nav class="site-nav">
+      <a href="/" class="{ 'active' if active=='home' else '' }">Calculator</a>
+      <a href="/peak-sun-hours/" class="{ 'active' if active=='psh' else '' }">Peak sun hours</a>
+      <a href="/about/" class="{ 'active' if active=='about' else '' }">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <h1>Solar Panel Calculator with <em>real</em> city data</h1>
+    <p class="lede">Every generic solar calculator assumes the same sun hours
+      for the whole country. This one uses satellite-reanalysis irradiance for
+      your actual city &mdash; from 3.48 peak sun hours in Seattle to
+      5.84 in Phoenix.</p>
+  </section>
+
+  <section class="panel" id="calc">
+    <form id="solar-form" autocomplete="off">
+      <div class="grid">
+        <label class="field">
+          <span class="field-label">Your city</span>
+          <select id="city" name="city">
+      <option value="austin">Austin, Texas</option>
+      <option value="atlanta">Atlanta, Georgia</option>
+      <option value="baltimore">Baltimore, Maryland</option>
+      <option value="boston">Boston, Massachusetts</option>
+      <option value="charlotte">Charlotte, North Carolina</option>
+      <option value="chicago">Chicago, Illinois</option>
+      <option value="cleveland">Cleveland, Ohio</option>
+      <option value="dallas">Dallas, Texas</option>
+      <option value="denver">Denver, Colorado</option>
+      <option value="detroit">Detroit, Michigan</option>
+      <option value="houston">Houston, Texas</option>
+      <option value="indianapolis">Indianapolis, Indiana</option>
+      <option value="jacksonville">Jacksonville, Florida</option>
+      <option value="kansas-city">Kansas City, Missouri</option>
+      <option value="las-vegas">Las Vegas, Nevada</option>
+      <option value="los-angeles">Los Angeles, California</option>
+      <option value="louisville">Louisville, Kentucky</option>
+      <option value="memphis">Memphis, Tennessee</option>
+      <option value="miami">Miami, Florida</option>
+      <option value="milwaukee">Milwaukee, Wisconsin</option>
+      <option value="minneapolis">Minneapolis, Minnesota</option>
+      <option value="nashville">Nashville, Tennessee</option>
+      <option value="new-orleans">New Orleans, Louisiana</option>
+      <option value="new-york">New York, New York</option>
+      <option value="phoenix">Phoenix, Arizona</option>
+      <option value="pittsburgh">Pittsburgh, Pennsylvania</option>
+      <option value="portland">Portland, Oregon</option>
+      <option value="raleigh">Raleigh, North Carolina</option>
+      <option value="richmond">Richmond, Virginia</option>
+      <option value="san-antonio">San Antonio, Texas</option>
+      <option value="san-diego">San Diego, California</option>
+      <option value="san-francisco">San Francisco, California</option>
+      <option value="seattle">Seattle, Washington</option>
+      <option value="st-louis">St Louis, Missouri</option>
+      <option value="tampa">Tampa, Florida</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Monthly electricity use (kWh)</span>
+          <input type="number" id="usage" name="usage" value="900" min="1" max="100000" step="1" inputmode="numeric">
+          <span class="field-hint">From your electricity bill. Check the 12-month total and divide by 12.</span>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Panel wattage</span>
+          <select id="wattage" name="wattage">
+            <option value="400" selected>400 W</option>
+            <option value="450">450 W</option>
+            <option value="500">500 W</option>
+            <option value="550">550 W</option>
+            <option value="600">600 W</option>
+            <option value="700">700 W</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Roof direction</span>
+          <select id="tilt" name="tilt">
+            <option value="1.0" selected>South-facing (optimal)</option>
+            <option value="0.92">South-east / south-west</option>
+            <option value="0.85">East or west facing</option>
+            <option value="0.7">North-facing</option>
+            <option value="0.75">Flat roof</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">System type</span>
+          <select id="system" name="system">
+            <option value="ongrid" selected>On-grid (no battery)</option>
+            <option value="hybrid">Hybrid (grid + battery backup)</option>
+            <option value="offgrid">Off-grid (battery only)</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Monthly electricity rate ($/kWh)</span>
+          <input type="number" id="rate" name="rate" value="0.17" min="0.01" max="2" step="0.01" inputmode="decimal">
+        </label>
+      </div>
+      <button type="submit" class="btn">Calculate my system</button>
+    </form>
+  </section>
+
+  <section id="results" class="results" hidden>
+    <h2 class="results-title">Your system in <span id="r-city"></span></h2>
+    <div class="stat-row">
+      <div class="stat"><span class="stat-num" id="r-panels">&mdash;</span><span class="stat-lab">panels</span></div>
+      <div class="stat"><span class="stat-num" id="r-kw">&mdash;</span><span class="stat-lab">system size (kWp)</span></div>
+      <div class="stat"><span class="stat-num" id="r-psh">&mdash;</span><span class="stat-lab">peak sun hours/day</span></div>
+      <div class="stat"><span class="stat-num" id="r-annual">&mdash;</span><span class="stat-lab">annual output (kWh)</span></div>
+      <div class="stat"><span class="stat-num" id="r-offset">&mdash;</span><span class="stat-lab">bill offset</span></div>
+      <div class="stat"><span class="stat-num" id="r-roof">&mdash;</span><span class="stat-lab">roof area needed</span></div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <h3>Month-by-month production</h3>
+        <p class="muted">Calculated from real satellite irradiance for this city,
+           so summer and winter differ the way they actually do on site.</p>
+        <table class="month-table" id="r-months"></table>
+      </div>
+      <div class="card">
+        <h3>How this was calculated</h3>
+        <ul class="bullets">
+          <li>Daily load = monthly kWh &divide; 30.</li>
+          <li>Array kW = daily load &divide; (peak sun hours &times; 0.826 efficiency &times; roof factor).</li>
+          <li>Panels = array kW &divide; panel wattage, rounded up.</li>
+          <li>Annual output uses each month's real irradiance value.</li>
+          <li>System efficiency follows the NREL PVWatts defaults:
+              14% system losses and 96% inverter efficiency.</li>
+        </ul>
+        <p class="muted" id="r-note"></p>
+        <p><a class="textlink" id="r-citylink" href="#">See this city's full solar data &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel alt">
+    <h2>Why city-level data changes the answer</h2>
+    <p>Two cities 300 miles apart can differ by more than 40% in annual solar
+       energy. A calculator that assumes "5 peak sun hours" everywhere
+       oversells panels in the north and undersells them in the desert.
+       These are the real measured values for each city we cover.</p>
+    <table class="data-table" id="psh-table">
+      <thead><tr><th>City</th><th>State</th><th>Peak sun hours/day</th><th>Annual irradiance (kWh/m&sup2;)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <h2>Which cities do we cover?</h2>
+    <ul class="city-links" id="city-links"></ul>
+  </section>
+</main>
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-brand">SolarCalc</p>
+      <p>Solar irradiance and panel output calculations for %d US cities, using
+         NASA POWER satellite reanalysis data (%d).</p>
+    </div>
+    <div>
+      <p class="foot-h">Tools</p>
+      <p><a href="/">Solar panel calculator</a></p>
+      <p><a href="/peak-sun-hours/">Peak sun hours by city</a></p>
+    </div>
+    <div>
+      <p class="foot-h">Company</p>
+      <p><a href="/about/">About the data</a></p>
+      <p><a href="/contact/">Contact</a></p>
+      <p><a href="/privacy/">Privacy</a></p>
+    </div>
+  </div>
+  <div class="wrap foot-note">
+    <p>Estimates only. Always confirm a system design with a licensed
+       installer before purchasing equipment.</p>
+  </div>
+</footer>
+<script src="/assets/data.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

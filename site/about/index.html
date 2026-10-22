@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About the Data — SolarCalc</title>
+<meta name="description" content="How SolarCalc sources solar irradiance data for 35 US cities using the NASA POWER API, and how the panel calculations work.">
+<link rel="canonical" href="https://solar.tekify.xyz/about/">
+<meta property="og:title" content="About the Data — SolarCalc">
+<meta property="og:description" content="How SolarCalc sources solar irradiance data for 35 US cities using the NASA POWER API, and how the panel calculations work.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://solar.tekify.xyz/about/">
+<meta name="theme-color" content="#0b3d5c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#9728;</text></svg>">
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">&#9728;</span>
+      <span class="brand-text">Solar<span class="brand-thin">Calc</span></span>
+    </a>
+    <nav class="site-nav">
+      <a href="/" class="{ 'active' if active=='home' else '' }">Calculator</a>
+      <a href="/peak-sun-hours/" class="{ 'active' if active=='psh' else '' }">Peak sun hours</a>
+      <a href="/about/" class="{ 'active' if active=='about' else '' }">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero"><h1>About the data</h1></section>
+  <section class="panel">
+    <h2>Where the numbers come from</h2>
+    <p>Every irradiance figure on this site comes from the
+       <strong>NASA POWER</strong> project &mdash; a reanalysis of satellite and
+       meteorological observations, served through a public API that needs no
+       key. We request the daily global horizontal irradiance
+       (<code>ALLSKY_SFC_SW_DWN</code>) for each city's exact coordinates over
+       the full calendar year 2024.</p>
+    <p>Peak sun hours are reported as annual irradiance divided by 365, which
+       is the standard definition and matches how PVWatts-style tools express
+       it.</p>
+    <p>The full dataset is embedded in the page as JSON, so every calculation
+       you run happens in your browser. We do not send your usage figures to a
+       server.</p>
+
+    <h2>How the panel calculation works</h2>
+    <ul class="bullets">
+      <li>Daily load = monthly kWh &divide; 30.</li>
+      <li>Array kW = daily load &divide; (peak sun hours &times; system efficiency &times; roof factor).</li>
+      <li>System efficiency = 0.86 &times; 0.96, the NREL PVWatts default for system losses and inverter efficiency.</li>
+      <li>Panels = array kW &divide; panel wattage, rounded up.</li>
+      <li>Annual output is summed month by month using each month's measured irradiance.</li>
+    </ul>
+
+    <h2>What this tool is not</h2>
+    <p>It is a sizing estimate, not a design. Shading from trees and buildings,
+       roof age, panel brand, snow and soiling all move the real number. Always
+       have a licensed installer check the design and confirm the panel and
+       inverter datasheets before you buy anything.</p>
+
+    <h2>Accuracy check</h2>
+    <p>Spot-checking the dataset against known values: Phoenix averages
+       5.84 peak sun hours and
+       Seattle 3.48. That ordering,
+       and the ~40% spread between them, matches the real-world gap between
+       the Sonoran Desert and the Pacific Northwest.</p>
+  </section>
+</main>
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-brand">SolarCalc</p>
+      <p>Solar irradiance and panel output calculations for %d US cities, using
+         NASA POWER satellite reanalysis data (%d).</p>
+    </div>
+    <div>
+      <p class="foot-h">Tools</p>
+      <p><a href="/">Solar panel calculator</a></p>
+      <p><a href="/peak-sun-hours/">Peak sun hours by city</a></p>
+    </div>
+    <div>
+      <p class="foot-h">Company</p>
+      <p><a href="/about/">About the data</a></p>
+      <p><a href="/contact/">Contact</a></p>
+      <p><a href="/privacy/">Privacy</a></p>
+    </div>
+  </div>
+  <div class="wrap foot-note">
+    <p>Estimates only. Always confirm a system design with a licensed
+       installer before purchasing equipment.</p>
+  </div>
+</footer>
+</body>
+</html>

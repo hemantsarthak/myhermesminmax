@@ -116,6 +116,12 @@ def main() -> int:
         "CLOUDFLARE_PAGES_PROJECT=moneymmax",
         "PRIMARY_DOMAIN=tekify.xyz",
         "",
+        "# Aliases matching the shared hermestom/.env so any agent's scripts work",
+        "# against either file.",
+        f'CF_API_TOKEN="{found.get("CLOUDFLARE_API_TOKEN", "")}"',
+        f'CF_ACCOUNT_ID="{found.get("CLOUDFLARE_ACCOUNT_ID", "")}"',
+        f'GITHUB_TOKEN="{found.get("GITHUB_PAT", "")}"',
+        "",
     ]
     out.write_text("\n".join(lines_out), encoding="utf-8")
 
