@@ -44,9 +44,20 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           wrangler pages deploy ./site \
-            --project-name=moneymmax \
+            --project-name=solarcalc-tekify \
             --branch=main \
             --commit-dirty=true
 
-      - name: Summary
-        run: echo "Deployed https://moneymmax.pages.dev/"
+      - name: Verify the live site
+        run: |
+          for i in 1 2 3 4 5 6; do
+            CODE=$(curl -s -o /tmp/live.html -w "%{http_code}" https://solar.tekify.xyz/ || echo 000)
+            if [ "$CODE" = "200" ] && grep -q "Solar Panel Calculator" /tmp/live.html; then
+              echo "live check: OK (HTTP $CODE, real content)"
+              exit 0
+            fi
+            echo "attempt $i: HTTP $CODE - retrying"
+            sleep 10
+          done
+          echo "::error::live site did not serve the expected content"
+          exit 1
