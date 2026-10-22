@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "loaded Sign up for HilltopAds",
+    "role: who=publisher",
+    "messenger: im=telegraph",
+    "filled: input[name=\"name\"]:visible, input[name=\"email\"]:visible, input[name=\"password\"]:visible",
+    "legal: legal=true",
+    "submitted via clicked: Sign up"
+  ],
+  "url": "https://hilltopads.com/signup",
+  "title": "Sign up for HilltopAds",
+  "bodyText": "Publisher\nAdvertiser\nAd formats\nFree resources\nBlog\nEN\n\nLog in\n\nSign up\n\nJoin HilltopAds\n\nAlready have an account in HilltopAds? Please login\n\nI`m the\nPlease select...\n\nI want to monetize traffic from a website or social media (Facebook, Instagram, Twitter, etc).\n\nName\nYour messenger contact\nEmail\nPassword\n\nI agree with and accept Terms & Conditions\n\nGet started\n\nCreate an account\n\nLog in\n\nAdvertisers\nAdvantages\nAd network for advertisers\nSelf-serve platform\nRun Ads via RTB\nAPI tools\nAdvertising Formats\nPopunder\nIn-Page\nBanners\nVideo\nAd Formats Live Demo\nFree Resources\nBlog\nCases\nFAQ for publishers\nFAQ for advertisers\nGuides for publishers\nGuides for advertisers\nGlossary\nPublishers\nAdvantages\nMonetize Website\nMonetize Facebook\nSelf-serve platform\nSell traffic via RTB\nAPI tools\nReferral program\nSolutions\nAI products\niGaming traffic\nYouTube promotion\nBuy website traffic\nDating\nMobile apps & utilities\nLead generation\nVPN, Pin-submit\neCommerce\nGames\nCompany\n\nAbout us\n\nCareers\n\nContact Us\n\nConferences\n\nMedia Kit\n\n\u00a9 2013-2026 HilltopAds. All rights reserved.\n\nPrivacy Policy\n\nTerms and Conditions\n\nCookies Policy\n\nReport Abuse\n\nSite Map\n\nEN\n\nThis website uses cookies to ensure you get the best experience on our website.Learn more\n\nGot it"
+}
